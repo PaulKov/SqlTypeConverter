@@ -32,6 +32,17 @@ namespace SqlTypeConverter
             EmptyStringReplacementType = emptyStringReplacementType;
         }
 
+        public SqlConvertSettings(SqlDataTypeValue sqlDataTypeValue, string[] sourceFormats, object replacementIfNull, object replacementIfEmptyOrWhiteSpaceString, 
+            SqlReplacementType nullReplacementType, SqlReplacementType emptyStringReplacementType, CultureInfo culture)
+            : this(sqlDataTypeValue, sourceFormats)
+        {
+            ReplacementIfNull = replacementIfNull;
+            ReplacementIfEmptyOrWhiteSpaceString = replacementIfEmptyOrWhiteSpaceString;
+            Culture = culture;
+            NullReplacementType = nullReplacementType;
+            EmptyStringReplacementType = emptyStringReplacementType;
+        }
+
         public SqlDataTypeValue SqlDataTypeValue
         {
 
@@ -58,11 +69,11 @@ namespace SqlTypeConverter
                     {
                         return 0;
                     }
-                    else if (SqlDataTypeValue.SqlDataType.IsBinaryType() && !sqlDataTypeValue.IsNullable)
+                    else if (SqlDataTypeValue.SqlDataType.SqlTypeGroup.In(SqlDateTypeGroup.BinaryTypes) && !sqlDataTypeValue.IsNullable)
                     {
                         return new byte[] { };
                     }
-                    else if (sqlDataTypeValue.IsNullable)
+                    else
                     {
                         return DBNull.Value;
                     }
@@ -89,15 +100,11 @@ namespace SqlTypeConverter
                     {
                         return 0;
                     }
-                    else if (SqlDataTypeValue.SqlDataType.IsBinaryType() && !sqlDataTypeValue.IsNullable)
+                    else if (SqlDataTypeValue.SqlDataType.SqlTypeGroup.In(SqlDateTypeGroup.BinaryTypes) && !sqlDataTypeValue.IsNullable)
                     {
                         return new byte[] { };
                     }
-                    else if (!SqlDataTypeValue.SqlDataType.IsCharType() && !SqlDataTypeValue.SqlDataType.IsTextType() 
-                            && SqlDataTypeValue.SqlDataType != SqlDataType.VariantSql 
-                            && !SqlDataTypeValue.SqlDataType.IsBinaryType()
-                            && sqlDataTypeValue.IsNullable
-                    )
+                    else 
                     {
                         return DBNull.Value;
                     }

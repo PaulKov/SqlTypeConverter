@@ -1,0 +1,10 @@
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\bin\Release\TestProj.exe.config
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\bin\Release\TestProj.exe
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\bin\Release\TestProj.pdb
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\bin\Release\SqlTypeConverter.dll
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\bin\Release\SqlTypeConverter.pdb
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\obj\Release\TestProj.csprojAssemblyReference.cache
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\obj\Release\TestProj.csproj.CoreCompileInputs.cache
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\obj\Release\TestProj.csproj.CopyComplete
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\obj\Release\TestProj.exe
+C:\SqlTypeConverter\SqlTypeConverter\TestProj\obj\Release\TestProj.pdb

@@ -49,7 +49,7 @@
     <Compile Include="SqlDataType.cs" />
     <Compile Include="SqlDataTypeExtensions.cs" />
     <Compile Include="SqlDataTypeValue.cs" />
-    <Compile Include="SqlExtensions.cs" />
+    <Compile Include="SqlDateTypeGroup.cs" />
     <Compile Include="SqlFormatException.cs" />
     <Compile Include="SqlFormatExceptionType.cs" />
     <Compile Include="SqlReplacementType.cs" />

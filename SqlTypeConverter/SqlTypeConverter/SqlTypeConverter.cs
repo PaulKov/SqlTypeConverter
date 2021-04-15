@@ -49,22 +49,33 @@ namespace SqlTypeConverter
                         {
                             if (sqlDataTypeValue.IsNullable)
                                 return DBNull.Value;
-                            else
+                            else 
                                 throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.NullError);
                         }                            
                     }
-                    else if (!sqlDataType.IsCharType() && !sqlDataType.IsTextType()
+                    else if (!sqlDataType.SqlTypeGroup.In(SqlDateTypeGroup.BinaryTypes, SqlDateTypeGroup.CharTypes, SqlDateTypeGroup.TextTypes)
                             && sqlDataType != SqlDataType.VariantSql
-                            && !sqlDataType.IsBinaryType()
                     )
                     {
                         throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.NonStringError);
+
                     }
                 }
 
                 string[] formats = convertSettings.SourceFormats;
 
-                if (sqlDataType.IsDateTimeType())
+                if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.TextTypes || sqlDataType == SqlDataType.VariantSql)
+                {
+                    return value;
+                }
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.CharTypes)
+                {
+                    if (sqlDataTypeValue.MaxLength > 0 && value.ToString().Length > sqlDataTypeValue.MaxLength)
+                        throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.InvalidValueLength);
+
+                    return value;
+                }
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.DateTimeTypes)
                 {
 
                     if (value is DateTime || value is SqlDateTime)
@@ -77,11 +88,11 @@ namespace SqlTypeConverter
                         return resDt;
                     }
                 }
-                else if(sqlDataType.IsIntegerType())
+                else if(sqlDataType.SqlTypeGroup == SqlDateTypeGroup.IntegerTypes)
                 {
                     return ConvertToSqlIntegerType(value, convertSettings);
                 }
-                else if (sqlDataType == SqlDataType.TimeSql)
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.TimeTypes)
                 {
 
                     if (value is TimeSpan ts)
@@ -95,7 +106,7 @@ namespace SqlTypeConverter
                     }
 
                 }
-                else if (sqlDataType.IsDateTimeOffsetType())
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.DateTimeOffsetTypes)
                 {
 
                     if (value is DateTimeOffset dtOffset)
@@ -110,7 +121,7 @@ namespace SqlTypeConverter
                     }
 
                 }
-                else if (sqlDataType.IsBooleanType())
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.BooleanTypes)
                 {
 
                     if (value is bool || value is SqlBoolean)
@@ -127,7 +138,7 @@ namespace SqlTypeConverter
                     }
 
                 }
-                else if (sqlDataType.IsFixedPrecisionNumericType() || sqlDataType.IsMonetaryType())
+                else if (sqlDataType.SqlTypeGroup.In(SqlDateTypeGroup.MonetaryTypes, SqlDateTypeGroup.FixedPrecisionTypes))
                 {
                     decimal d;
                     
@@ -167,7 +178,7 @@ namespace SqlTypeConverter
                         return resFloat;
                     }
                 }
-                else if (sqlDataType.IsBinaryType())
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.BinaryTypes)
                 {
                     if (value is byte[] || value is SqlBinary)
                     {
@@ -178,14 +189,18 @@ namespace SqlTypeConverter
 
                         var arr = value.ToString().ToCharArray().Select(c => (byte) c).ToArray();
 
-                        if (sqlDataTypeValue.MaxLength > 0 && arr.Length > sqlDataTypeValue.MaxLength)
-                            throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.InvalidValueLength);
+                        if(sqlDataType != SqlDataType.ImageSql)
+                        {
+                            if (sqlDataTypeValue.MaxLength > 0 && arr.Length > sqlDataTypeValue.MaxLength)
+                                throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.InvalidValueLength);
+
+                        }
 
                         return arr;
                     }
 
                 } 
-                else if (sqlDataType == SqlDataType.UniqueIdentifierSql)
+                else if (sqlDataType.SqlTypeGroup == SqlDateTypeGroup.GuidTypes)
                 {
                     if(value is Guid || value is SqlGuid)
                     {
@@ -195,14 +210,7 @@ namespace SqlTypeConverter
                     {
                         return resGuid;
                     }
-                }
-                else if (sqlDataType.IsCharType() || sqlDataType.IsTextType())
-                {
-                    if (sqlDataTypeValue.MaxLength > 0 && value.ToString().Length > sqlDataTypeValue.MaxLength)
-                        throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.InvalidValueLength);
-
-                    return value;
-                }
+                }                
                 else
                 {
                     return value;

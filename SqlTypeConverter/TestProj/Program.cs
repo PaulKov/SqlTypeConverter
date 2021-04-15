@@ -10,9 +10,9 @@ namespace TestProj
         {
             /* test */
 
-            DateTimeOffset d = (DateTimeOffset) SqlTypeConverter.SqlTypeConverter.ConvertToSqlType(" 20.12.1900T12:04:54.123 -08:00", new SqlConvertSettings(new SqlDataTypeValue { SqlDataType = SqlDataType.DateTimeOffsetSql}, new string[] { "dd.MM.yyyyTHH:mm:ss.fff zzz   " }));
+            String str = SqlTypeConverter.SqlTypeConverter.ConvertToSqlType("   ", new SqlConvertSettings(new SqlDataTypeValue { SqlDataType = SqlDataType.MoneySql}, null, null, "   $34  ", SqlReplacementType.CUSTOM, SqlReplacementType.CUSTOM, CultureInfo.GetCultureInfo("en-US"))).ToString();
 
-            Console.WriteLine(d.ToString("dd.MM.yyyy HH:mm:ss.fff zzz"));
+            Console.WriteLine(str);
 
             Console.ReadKey(true);
         }
