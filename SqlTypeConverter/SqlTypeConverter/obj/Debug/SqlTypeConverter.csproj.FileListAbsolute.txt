@@ -1,0 +1,6 @@
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\bin\Debug\SqlTypeConverter.dll
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\bin\Debug\SqlTypeConverter.pdb
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Debug\SqlTypeConverter.csprojAssemblyReference.cache
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Debug\SqlTypeConverter.csproj.CoreCompileInputs.cache
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Debug\SqlTypeConverter.dll
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Debug\SqlTypeConverter.pdb
