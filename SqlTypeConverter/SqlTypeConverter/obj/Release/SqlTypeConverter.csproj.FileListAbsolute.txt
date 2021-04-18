@@ -3,3 +3,4 @@ C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\bin\Release\SqlTypeConvert
 C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Release\SqlTypeConverter.csproj.CoreCompileInputs.cache
 C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Release\SqlTypeConverter.dll
 C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Release\SqlTypeConverter.pdb
+C:\SqlTypeConverter\SqlTypeConverter\SqlTypeConverter\obj\Release\SqlTypeConverter.csprojAssemblyReference.cache

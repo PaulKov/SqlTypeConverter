@@ -12,8 +12,6 @@ namespace SqlTypeConverter
 
         private object replacementIfNull = null;
         private object replacementIfEmptyOrWhiteSpaceString = null;
-
-        private string[] sourceFormats;
         private SqlDataTypeValue sqlDataTypeValue;
        
         public SqlConvertSettings(SqlDataTypeValue sqlDataTypeValue, string[] sourceFormats = null)
@@ -50,12 +48,7 @@ namespace SqlTypeConverter
             set => sqlDataTypeValue = value ?? throw new ArgumentNullException(nameof(sqlDataTypeValue));
         }
 
-        public string[] SourceFormats
-        {
-
-            get => sourceFormats;
-            set => sourceFormats = value;
-        }
+        public string[] SourceFormats { get; set; }
 
         public object ReplacementIfNull
         {

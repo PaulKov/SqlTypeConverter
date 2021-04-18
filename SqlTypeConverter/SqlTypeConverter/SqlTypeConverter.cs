@@ -53,13 +53,6 @@ namespace SqlTypeConverter
                                 throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.NullError);
                         }                            
                     }
-                    else if (!sqlDataType.SqlTypeGroup.In(SqlDateTypeGroup.BinaryTypes, SqlDateTypeGroup.CharTypes, SqlDateTypeGroup.TextTypes)
-                            && sqlDataType != SqlDataType.VariantSql
-                    )
-                    {
-                        throw new SqlFormatException(sqlDataTypeValue, value, SqlFormatExceptionType.NonStringError);
-
-                    }
                 }
 
                 string[] formats = convertSettings.SourceFormats;

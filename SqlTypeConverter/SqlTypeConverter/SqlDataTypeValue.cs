@@ -29,7 +29,7 @@ namespace SqlTypeConverter
         public SqlDataTypeValue(String sqlDataTypeStr, int maxLength, int precision, int scale, bool isNullable)
         {
 
-            SqlDataType = Enumeration.FindByName<SqlDataType>(sqlDataTypeStr, StringComparison.OrdinalIgnoreCase);
+            SqlDataType = SqlDataType.GetSqlDataTypeByName(sqlDataTypeStr);
 
             if(SqlDataType == null)
                 throw new ArgumentException($"Unable to convert string {sqlDataTypeStr} to type {nameof(SqlDataType)}", nameof(sqlDataTypeStr)); ;
